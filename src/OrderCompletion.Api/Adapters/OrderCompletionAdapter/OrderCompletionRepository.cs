@@ -33,10 +33,9 @@ internal class OrderCompletionRepository : IOrderCompletionRepository
         {
             connection.Open();
 
-            // I'm not going to change infrastructure code for this assignment, but for completeness, you'd want
-            // to run the following two queries in a single transaction as technically the order and its order lines
-            // could otherwise be read from different database states. (or bypass the whole situation by executing
-            // a single JOIN query)
+            // For completeness, these two queries should ideally run in a single repeatable-read transaction, as the order
+            // and its order lines could otherwise be read from different database states. Alternatively, a single JOIN query
+            // could be used.
 
             var orderQuery = "SELECT * FROM ORDERS WHERE Id = @Id";
             var orderDto = connection.QuerySingleOrDefault<OrderDto>(orderQuery, new { Id = orderId });

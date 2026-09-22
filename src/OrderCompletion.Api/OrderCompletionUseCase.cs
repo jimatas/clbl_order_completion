@@ -54,6 +54,9 @@ public class OrderCompletionUseCase : IOrderCompletionUseCase
                 continue;
             }
 
+            // Note: A database or I/O exception here could leave the order in the Submitted state after the notification service
+            // has already processed the request. The scheduled job would then notify the same order again. The supplied notification
+            // service provides no idempotency guarantee.
             _orderCompletionRepository.CompleteOrder(orderId);
 
             _logger.LogInformation("Order {OrderId} was completed", orderId);

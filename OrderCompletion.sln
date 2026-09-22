@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32819.101
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12210.168 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderCompletion.Api", "src\OrderCompletion.Api\OrderCompletion.Api.csproj", "{711766DF-4C9D-447A-A048-955BC0EAB58A}"
 EndProject
@@ -17,6 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{49167974-0176-4206-8E3F-B9D8A60375FE}"
 	ProjectSection(SolutionItems) = preProject
 		Assignment.md = Assignment.md
+		DECISIONS.md = DECISIONS.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -46,12 +47,12 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D145FD8E-324D-4288-981E-083E01B308D8}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{711766DF-4C9D-447A-A048-955BC0EAB58A} = {03D72CBD-E6AB-47F2-A50D-CEE64586A62F}
-		{4D6D2ECA-CB14-47F9-9385-0E66E4377C05} = {03D72CBD-E6AB-47F2-A50D-CEE64586A62F}
 		{CF3296B7-B91F-4520-94D5-9841919E87F9} = {E0D8CA45-31FC-4E1F-BAF3-B0E9F80F8542}
+		{4D6D2ECA-CB14-47F9-9385-0E66E4377C05} = {03D72CBD-E6AB-47F2-A50D-CEE64586A62F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D145FD8E-324D-4288-981E-083E01B308D8}
 	EndGlobalSection
 EndGlobal
