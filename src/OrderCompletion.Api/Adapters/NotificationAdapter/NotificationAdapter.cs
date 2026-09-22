@@ -7,25 +7,29 @@ namespace OrderCompletion.Api.Adapters.NotificationAdapter;
 
 public static class NotificationAdapter
 {
-    public static void RegisterNotificationAdapter(this IServiceCollection services, IConfiguration configuration)
+    public static void RegisterNotificationAdapter(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Action<IHttpClientBuilder>? configureBuilder = null)
     {
-        services.AddTransient<INotificationClient, NotificationClient>();
-        services
-            .AddHttpClient<INotificationClient, NotificationClient>(client =>
-            {
-                client.BaseAddress = new Uri(configuration.GetValue<string>("NotificationApi:BaseUrl")!);
-            })
-            .AddResilienceHandler("notification-retry", pipelineBuilder =>
-            {
-                pipelineBuilder.AddRetry(new RetryStrategyOptions<HttpResponseMessage>
-                {
-                    ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
-                        .Handle<HttpRequestException>()
-                        .HandleResult(response =>
-                            response.StatusCode == HttpStatusCode.InternalServerError),
+        var builder = services.AddHttpClient<INotificationClient, NotificationClient>(client =>
+        {
+            client.BaseAddress = new Uri(configuration.GetValue<string>("NotificationApi:BaseUrl")!);
+        });
 
-                    MaxRetryAttempts = configuration.GetValue<int>("NotificationApi:MaxRetryAttempts")
-                });
+        builder.AddResilienceHandler("notification-retry", pipelineBuilder =>
+        {
+            pipelineBuilder.AddRetry(new RetryStrategyOptions<HttpResponseMessage>
+            {
+                ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                    .Handle<HttpRequestException>()
+                    .HandleResult(response =>
+                        response.StatusCode == HttpStatusCode.InternalServerError),
+
+                MaxRetryAttempts = configuration.GetValue<int>("NotificationApi:MaxRetryAttempts")
             });
+        });
+
+        configureBuilder?.Invoke(builder);
     }
 }

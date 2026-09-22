@@ -10,6 +10,7 @@ public class Order
     public bool IsEligibleForCompletion(DateTime asOfUtc) =>
         OrderState == OrderState.Submitted &&
         OrderLines.Count > 0 &&
-        OrderLines.All(ol => ol.DeliveredQuantity == ol.OrderedQuantity) &&
+        OrderLines.All(line =>
+            line.DeliveredQuantity == line.OrderedQuantity) &&
         OrderDate <= asOfUtc.AddMonths(-6);
 }
