@@ -17,6 +17,8 @@ By that time, our interviewers will have studied your code and prepared some que
 
 The exact requirements and how to get started are described in Assignment.md
 
+My design decisions and assumptions are documented in [DECISIONS.md](DECISIONS.md).
+
 ## Part 2: Extending the service
 
 During this part of the interview, we will do some pair programming. One of the interviewers will start as the driver and work together with you on a small extension of the service. Halfway, you will swap roles.
